@@ -1,0 +1,30 @@
+{
+  "name": "glitch-deploy",
+  "version": "0.0.1",
+  "description": "A simple Node app for deploying to Glitch after push to GitHub repo.",
+  "author": "Brian Marquis",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ],
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
