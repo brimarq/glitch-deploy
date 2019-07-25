@@ -31,6 +31,7 @@ function verifyGithubPayload (req, res, next) {
 };
 
 function eventHandler (req, res) {
+  console.log("*** RECEIVED GITHUB PUSH EVENT ***")
   console.log(req.event_type, req.action, req.payload);
   return res.send('got authentic event data through my new middleware!');
 };
