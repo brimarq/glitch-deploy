@@ -25,17 +25,11 @@ function verifyGithubPayload (req, res, next) {
     return res.status(401).send('Mismatched signatures');
   }
 
-  // const { ref, action, ...payload } = body;
-  // req.event_type = headers['x-github-event']; // one of: https://developer.github.com/v3/activity/events/types/ 
-  // req.action = action;
-  // req.payload = payload;
-  // req.ack_msg = '*** Received GITHUB PUSH event ***';
   next();
 };
 
 
 function eventHandler (req, res) {
-  // const { event_type, action, payload, ack_msg } = req;
   const repoUrl = req.body.repository.git_url;
   const repoBranch = process.env.PULL_BRANCH || 'master';
   const gitPull = `git checkout -- ./ && git pull -X theirs ${repoUrl} ${repoBranch} && refresh`;
