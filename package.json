@@ -17,7 +17,7 @@
     "node": "10.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
+    "url": "https://github.com/brimarq/glitch-deploy.git"
   },
   "license": "MIT",
   "keywords": [
