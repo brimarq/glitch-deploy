@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Welcome to Glitch!</title>
+    <title>Glitch Deploy</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
@@ -21,10 +21,49 @@
     <link rel="stylesheet" href="/style.css">
     
     <!-- import the webpage's client-side javascript file -->
-    <script src="/client.js" defer></script>
+    <!-- <script src="/client.js" defer></script> -->
   </head>
   <body>
-    <header>
+      <header>
+          <h1 id="glitchdeploy">Glitch Deploy</h1>
+      </header>
+  
+      <main>
+          <p>This simple app adds a <a href="https://developer.github.com/webhooks/">GitHub Webhook</a> endpoint to <a href="https://glitch.com/~hello-express">Glitch's hello-express app</a>, that employs HMAC signature verification to deploy to Glitch upon push events from a GitHub repository.</p>
+        
+          <p>Inspired by <a href="https://github.com/noise-machines/git-glitched">Git Glitched</a>, code for the endpoint route is adapted from <a href="https://medium.com/chingu/how-to-verify-the-authenticity-of-a-github-apps-webhook-payload-8d63ccc81a24">this article</a>.</p>
+          
+          <h2 id="setup">Setup</h2>
+          
+          <ul>
+            <li>Fork <a href="https://github.com/brimarq/glitch-deploy">this repo</a> on GitHub.</li>
+            
+            <li>On <a href="https://glitch.com">Glitch</a>, create a new project with the option to "Clone from Git Repo", using the git URL from your newly created fork (e.g. <code>https://github.com/username/reponame.git</code>). When the new project loads, replace the contents of <code>.env</code> with the contents of <code>.env.example</code> there. After doing this, the <code>.env.example</code> on Glitch can be deleted.</li>
+            
+            <li>Clone your fork from GitHub to your computer.</li>
+            
+            <li>In your computer's terminal, <code>cd</code> to your cloned repo's directory and rename <code>.env.example</code> to <code>.env</code>. Now, run <code>node create-secret.js</code>, copy the output, and paste it as the value to <code>SECRET</code> in the <code>.env</code> file, both in your local project and on Glitch.</li>
+            
+            <li>Back in your GitHub repo's webhooks settings (<code>https://github.com/username/reponame/settings/hooks</code>), create a new webhook setting the payload URL to your Glitch project's endpoint (<code>https://your-project-name.glitch.me/glitch-deploy</code>), content type to <code>application/json</code>, secret to the value of <code>SECRET</code> in the <code>.env</code> file, and triggering events as "Just the <code>push</code> event.".</li>
+            
+            <li>Now you're ready to go! When you push to GitHub from your local project, the webhook will automatically notify your Glitch project to pull in the new changes.</li>
+          </ul>
+          
+          <h2 id="start">Start</h2>
+          <ul>
+            <li>Install dependencies with <code>npm install</code>.  </li>
+            
+            <li>To start the app with <code>nodemon</code> run <code>npm run dev</code>. Otherwise, <code>npm start</code>.   </li>
+          </ul>
+          
+          <h2 id="note">NOTE:</h2>
+          
+          
+          <p>By default, the Glitch project will pull from the repo <code>master</code> branch. If you create additional branches in your repo and want it to pull from a different one, just uncomment the <code>PULL_BRANCH</code> variable in the project <code>.env</code> file <em>on Glitch</em> (this file is untracked), and add your preferred branch as the value (e.g. <code>PULL_BRANCH=glitch</code>). </p>
+
+      </main>
+
+    <!-- <header>
       <h1>
         A Dream of the Future
       </h1>
@@ -43,7 +82,7 @@
       <section class="dreams">
         <ul id="dreams"></ul>
       </section>
-    </main>
+    </main> -->
 
     <footer>
       Made with <a href="https://glitch.com">Glitch</a>!
