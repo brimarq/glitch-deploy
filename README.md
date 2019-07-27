@@ -9,7 +9,8 @@ Inspired by [Git Glitched](https://github.com/noise-machines/git-glitched), code
 - Fork [this repo](https://github.com/brimarq/glitch-deploy) on GitHub.  
 - On [Glitch](https://glitch.com), create a new project with the option to "Clone from Git Repo", using the git URL from your newly created fork (e.g. `https://github.com/username/reponame.git`). When the new project loads, replace the contents of `.env` with the contents of `.env.example` there. After doing this, the `.env.example` on Glitch can be deleted.    
 - Clone your fork from GitHub to your computer.  
-- In your computer's terminal, `cd` to your cloned repo's directory and rename `.env.example` to `.env`. Now, run `node create-secret.js`, copy the output, and paste it as the value to `SECRET` in the `.env` file, both in your local project and on Glitch.  
+- In your local project, rename `.env.example` to `.env`.  
+- In your computer's terminal, `cd` to your project root directory and run `npm run mksecret`. Copy the output hex string and paste it as the value to `SECRET` in the `.env` file, both in your local project and on Glitch.  
 - Back in your GitHub repo's webhooks settings (`https://github.com/username/reponame/settings/hooks`), create a new webhook setting the payload URL to your Glitch project's endpoint (`https://your-project-name.glitch.me/glitch-deploy`), content type to `application/json`, secret to the value of `SECRET` in the `.env` file, and triggering events as "Just the `push` event.". 
 - Now you're ready to go! When you push to GitHub from your local project, the webhook will automatically notify your Glitch project to pull in the new changes.  
 

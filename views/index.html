@@ -41,8 +41,10 @@
             <li>On <a href="https://glitch.com">Glitch</a>, create a new project with the option to "Clone from Git Repo", using the git URL from your newly created fork (e.g. <code>https://github.com/username/reponame.git</code>). When the new project loads, replace the contents of <code>.env</code> with the contents of <code>.env.example</code> there. After doing this, the <code>.env.example</code> on Glitch can be deleted.</li>
             
             <li>Clone your fork from GitHub to your computer.</li>
+
+            <li>In your local project, rename <code>.env.example</code> to <code>.env</code>.</li>
             
-            <li>In your computer's terminal, <code>cd</code> to your cloned repo's directory and rename <code>.env.example</code> to <code>.env</code>. Now, run <code>node create-secret.js</code>, copy the output, and paste it as the value to <code>SECRET</code> in the <code>.env</code> file, both in your local project and on Glitch.</li>
+            <li>In your computer's terminal, <code>cd</code> to your project root directory and run <code>npm run mksecret</code>. Copy the output hex string and paste it as the value to <code>SECRET</code> in the <code>.env</code> file, both in your local project and on Glitch.</li>
             
             <li>Back in your GitHub repo's webhooks settings (<code>https://github.com/username/reponame/settings/hooks</code>), create a new webhook setting the payload URL to your Glitch project's endpoint (<code>https://your-project-name.glitch.me/glitch-deploy</code>), content type to <code>application/json</code>, secret to the value of <code>SECRET</code> in the <code>.env</code> file, and triggering events as "Just the <code>push</code> event.".</li>
             
