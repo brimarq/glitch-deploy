@@ -28,14 +28,22 @@ function verifyGithubPayload (req, res, next) {
   next();
 };
 
-
 function eventHandler (req, res) {
-  const repoUrl = req.body.repository.git_url;
-  const repoBranch = process.env.PULL_BRANCH || 'master';
-  const gitPull = `git checkout -- ./ && git pull -X theirs ${repoUrl} ${repoBranch} && refresh`;
-  const output = execSync(gitPull).toString();
-  console.log(output);
-  return res.send();
+  const repoRef = req.body.ref;
+  const repoGitUrl = req.body.repository.git_url;
+  const pushedBranch = repoRef.split('/').pop();
+  const pullBranch = process.env.PULL_BRANCH || 'master';
+  const gitPull = `git checkout -- ./ && git pull -X theirs ${repoGitUrl} ${pullBranch} && refresh`;
+
+  if (repoRef !== `refs/heads/${pullBranch}`) {
+    return res.send(`No deployment for this event. Push was to ${pushedBranch} branch, but Glitch is set to pull ${pullBranch}.`)
+  } else {
+    console.log('Fetching updates...');
+    const output = execSync(gitPull).toString();
+    console.log(output);
+    return res.send(`Repo ${pullBranch} branch successfully deployed to Glitch.`);
+  }
+  
 };
 
 module.exports = function (app) {
