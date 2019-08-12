@@ -28,8 +28,6 @@ function verifyGithubPayload (req, res, next) {
   next();
 };
 
-
-
 function eventHandler (req, res) {
   const eventType = req.headers['x-github-event'];
   const { ref, repository } = req.body;
